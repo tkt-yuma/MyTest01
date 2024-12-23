@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>登録データ一覧</title>
+<script type="text/javascript">
+        // 削除確認ダイアログ
+        function confirmDelete(id) {
+            // 確認ダイアログを表示
+            const result = confirm("本当に削除しますか？");
+            if (result) {
+                // 「OK」がクリックされた場合は削除処理を行う
+                window.location.href = '/delete/' + id;
+            } else {
+                // 「キャンセル」がクリックされた場合は何もしない
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+	<h1 th:text="${message}">メッセージ</h1>
+	<h1>登録データ一覧</h1>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>名前</th>
+					<th>年齢</th>
+					<th>趣味</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="list : ${personlist}">
+					<td th:text="${list.id}"></td>
+					<td th:text="${list.name}"></td>
+					<td th:text="${list.age}"></td>
+					<td th:text="${list.hobby}"></td>				
+<!--					<td><a th:href="@{/delete/{id}(id=${list.id})}">削除</a></td>-->
+				<!--<td>
+				      <form th:action="@{/delete}" method="post">
+				           IDを隠しフィールドとしてフォームに追加 -->
+				         <!-- <input type="hidden" th:value="${list.id}" name="id"/>
+				          <input type="submit" value="削除" name="index"/>
+				      </form>
+				  </td> -->
+				  <td>
+				  <!-- 削除ボタンにconfirmDelete関数を適用 -->
+               <button th:onclick="'confirmDelete(' + ${list.id} + ')'" >削除</button>
+           </td>
+						</tr>
+			</tbody>
+		</table>
+		<a th:href="@{/create}">新規人物登録</a>
+		<div></div>
+		<a th:href="@{mainmenu}">メインメニューに戻る</a>
+</body>
+</html>

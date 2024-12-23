@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>人物管理表</title>
+</head>
+<body>
+	<h1>メインメニュー</h1>
+	<div>
+		<h3><a th:href="@{/index}">登録一覧表示</a></h3>
+		<form th:action="@{/index}"method="post">
+			<input type="submit" value="登録一覧表示（ボタン版）"name="index">
+		</form>
+		<ul>
+		<li><a th:href="@{/create}">新しい人物登録</a></li>
+		<li><a th:href="@{/update/2}">人物の情報を更新</a></li>
+		<li><a th:href="@{/index}">人物情報を削除</a></li>
+		</ul>
+	</div>
+</body>
+</html>

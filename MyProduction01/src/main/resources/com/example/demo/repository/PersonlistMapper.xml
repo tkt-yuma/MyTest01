@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.PersonlistMapper">
+
+	<!-- <select id="selectAll" resultType="com.example.demo.entity.Kakeibo"> 
+		select 日付 as Hiduke,費目 as Himoku,メモ as Memo,入金額 as Nyuukin,出金額 as Syukkin 
+		from 家計簿 </select> -->
+
+	<!-- 新しい人物をデータベースに追加するSQLを定義 -->
+	<insert id="insertPerson"
+		parameterType="com.example.demo.entity.Personlist">
+		INSERT INTO personlist VALUES (#{Id}, #{Name}, #{Age}, #{Hobby})
+<!--		insert into personlist values(id,name,age,hobby)-->
+	</insert>
+	
+	<!-- 特定のIDを持つ人物の情報をデータベースから更新する処理 -->
+	<update id="updatePerson" parameterType="com.example.demo.entity.Personlist">
+		UPDATE personlist SET name = #{Name}, age = #{Age}, hobby = #{Hobby} 
+		WHERE id = #{Id}
+	</update>
+	
+	<!-- 特定のIDを持つ人物の情報をデータベースから削除する処理 -->
+	<delete id="deletePerson" parameterType="INTEGER">
+		DELETE FROM personlist WHERE id = #{Id}
+	</delete>
+
+	<!-- 登録リストを全件表示する処理 -->
+	<resultMap id="PersonlistMap"
+		type="com.example.demo.entity.Personlist">
+		<result column="id" jdbcType="INTEGER" property="Id" />
+		<result column="name" jdbcType="VARCHAR" property="Name" />
+		<result column="age" jdbcType="INTEGER" property="Age" />
+		<result column="hobby" jdbcType="VARCHAR" property="Hobby" />
+	</resultMap>
+
+	<select id="selectAll" resultMap="PersonlistMap">
+		select id,name,age,hobby from
+		personlist
+	</select>
+
+
+</mapper>
