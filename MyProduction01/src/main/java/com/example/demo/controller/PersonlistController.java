@@ -23,6 +23,7 @@ public class PersonlistController extends HttpServlet{
 	//メイン画面
 	@GetMapping("mainmenu")
 	public String main() {
+		System.out.println("テストてすと");
 		return "mainmenu";
 	}
 	
